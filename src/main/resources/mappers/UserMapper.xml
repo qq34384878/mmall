@@ -150,4 +150,16 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="checkUsername" resultType="int" parameterType="string">
+    select count(1) from mmall_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <select id="selectLogin" resultMap="BaseResultMap" parameterType="map">
+    select
+--    *???// 这样真的好吗？答案就是，这样不好，用什么查什么
+    <include refid="Base_Column_List"/>
+    from mmall_user
+    where username = #{username,jdbcType=VARCHAR}
+    and password = #{password,jdbcType=VARCHAR}
+  </select>
 </mapper>
